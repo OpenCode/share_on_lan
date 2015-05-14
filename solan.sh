@@ -23,5 +23,16 @@
 #
 # ######################################################################
 
-cd $1
-python -m SimpleHTTPServer
+# ----- Move to passed path
+path=$1
+cd $path
+echo "Moved to $path"
+# ----- Get port
+port=${2:-8000}
+# ----- Get local IP
+lan_ip=$(hostname -I)
+lan_ip=${lan_ip/ /}  # Remove last white space
+echo "Connection open on $lan_ip:$port"
+# ----- Server ON
+echo "Starting server"
+python -m SimpleHTTPServer $port
